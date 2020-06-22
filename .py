@@ -6,7 +6,7 @@ import requests
 import re
 
 
-page=requests.get('https://www.tradewindsfruit.com/hot-peppers')
+page=requests.get('https://www.tradewindsfruit.com/hot-peppers/?sort=alphaasc&page=2')
 
 bs=BeautifulSoup(page.content, 'html.parser')
 
@@ -22,3 +22,13 @@ brs=[aclass.find('br').next_sibling for aclass in theclass]
 
 print(strongs)
 print(brs)
+
+pepperlist=pd.DataFrame(
+    {
+        'Name': strongs,
+        'Price':brs,
+    })
+
+print(pepperlist)
+
+pepperlist.to_csv('pepperprice.csv')

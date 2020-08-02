@@ -1,0 +1,21 @@
+import requests
+from bs4 import BeautifulSoup
+import csv
+
+res = requests.get('https://www.plumdeluxe.com/teashop?fwp_flavor=spicy')
+soup = BeautifulSoup(res.content, 'lxml')
+
+theclass = soup.find("div", {"class":"fl-post-grid fl-paged-scroll-to"})
+titles = theclass.select(".fl-post-grid-title")
+prices = theclass.select("p")
+
+for title, price in zip (titles, prices):
+    (title.attrs.get('title'))
+    print(title.text)
+    print(price.text)
+
+with open ("tealist.csv", 'w', newline = '') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(["Name", "Description and Price"])
+    for title, price in zip (titles, prices):
+        csvwriter.writerow([title.text, price.text])

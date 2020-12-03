@@ -20,13 +20,13 @@ y= theclass[0].find('br').next_sibling
 strongs=[aclass.find('strong').get_text() for aclass in theclass]
 brs=[aclass.find('br').next_sibling for aclass in theclass]
 
-print(strongs)
-print(brs)
+print(col)
+print(m)
 
 pepperlist=pd.DataFrame(
     {
-        'Name': strongs,
-        'Price':brs,
+        'Name': col,
+        'Price':m,
     })
 
 print(pepperlist)
